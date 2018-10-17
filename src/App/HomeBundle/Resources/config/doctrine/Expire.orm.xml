@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="App\HomeBundle\Entity\Expire" table="expire">
+    <indexes>
+      <index name="Expire_User_ID_FK_idx" columns="User"/>
+      <index name="Expire_Package_ID_FK_idx" columns="Package"/>
+    </indexes>
     <id name="id" type="integer" column="Id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="user" type="integer" column="User" nullable="true">
-      <options>
-        <option name="unsigned"/>
-      </options>
-    </field>
-    <field name="package" type="integer" column="Package" nullable="true">
-      <options>
-        <option name="unsigned"/>
-      </options>
-    </field>
     <field name="interest" type="string" column="Interest" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="enddate" type="string" column="Enddate" length="45" nullable="true">
+    <field name="currentdate" type="string" column="Currentdate" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+    <many-to-one field="package" target-entity="Package" fetch="LAZY">
+      <join-columns>
+        <join-column name="Package" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="user" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="User" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

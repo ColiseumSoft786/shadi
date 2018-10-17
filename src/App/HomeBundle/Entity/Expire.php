@@ -138,4 +138,33 @@ class Expire
     {
         return $this->id;
     }
+    /**
+     * @var string
+     */
+    private $currentdate;
+
+
+    /**
+     * Set currentdate
+     *
+     * @param string $currentdate
+     *
+     * @return Expire
+     */
+    public function setCurrentdate($currentdate)
+    {
+        $this->currentdate = $currentdate;
+
+        return $this;
+    }
+
+    /**
+     * Get currentdate
+     *
+     * @return string
+     */
+    public function getCurrentdate()
+    {
+        return $this->currentdate;
+    }
 }

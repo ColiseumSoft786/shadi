@@ -55,7 +55,8 @@ class DefaultController extends Controller
                     $error = "You Are Blocked Temporary!";
                     return $this->render('SubAdminBundle:Default:index.html.twig',
                         array(
-                            'Block' => $error
+                            'Block' => $error,
+                            'NotMatch' => $notmatch
                         ));
                 }
                 $_SESSION['subadmin'] = $phone;
@@ -64,7 +65,8 @@ class DefaultController extends Controller
                 $notmatch = "Phone Or Password Is Incorrect!";
                 return $this->render('SubAdminBundle:Default:index.html.twig',
                     array(
-                        'NotMatch' => $notmatch
+                        'NotMatch' => $notmatch,
+                        'Block' => $notmatch
                     ));
             }
         }
