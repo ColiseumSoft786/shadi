@@ -1,0 +1,48 @@
+{% extends'::admin.html.twig' %}
+
+{% block body %}
+
+    <h2>Login Area</h2> <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" data-collapsed="0">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Login
+                    </div>
+                    <div class="panel-options"> <a href="#" data-rel="collapse"><i
+                                    class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i
+                                    class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i
+                                    class="entypo-cancel"></i></a></div>
+                </div>
+                <div class="panel-body">
+                    <h3>{{ Block }}</h3>
+                    <form action="" method="post" role="form" class="form-horizontal form-groups-bordered">
+                        <div class="form-group">
+                            <label for="field-1" class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-5">
+                                <input type="tel" name="phone" class="form-control" id="field-1"
+                                       placeholder="Placeholder(Phone)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="field-1" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-5">
+                                <input type="password" name="password" class="form-control" id="field-1"
+                                       placeholder="Placeholder(Password)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-5">
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+{% endblock %}

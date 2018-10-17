@@ -1,0 +1,63 @@
+{% extends'::admin.html.twig' %}
+
+{% block body %}
+    <style>
+        /*.dt-buttons{
+            display: none!important;
+        }*/
+    </style>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            var $table1 = jQuery('#table-1');
+// Initialize DataTable
+            $table1.DataTable({
+                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "bStateSave": true,
+                dom: 'lBfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+// Initalize Select Dropdown after DataTables is created
+            $table1.closest('.dataTables_wrapper').find('select').select2({
+                minimumResultsForSearch: -1
+            });
+        });
+    </script>
+    <table class="table table-bordered datatable" id="table-1">
+        <thead>
+        <tr>
+            <th>Caste</th>
+            <th>Religion</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for item in Caste %}
+            <tr class="odd gradeX">
+                <td> &nbsp; {{ item.name }}</td>
+                <td> &nbsp; {{ item.religion.name }}</td>
+                <td class="col-md-3">
+                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left"> <i class="entypo-pencil"></i>Edit</a>
+                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left"> <i class="entypo-cancel"></i>Delete</a>
+                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left"> <i class="entypo-info"></i>Profile</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Caste</th>
+            <th>Religion</th>
+            <th>Action</th>
+        </tr>
+        </tfoot>
+    </table>
+
+
+{% endblock %}

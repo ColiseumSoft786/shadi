@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\HomeBundle\Entity\User" table="user">
+    <indexes>
+      <index name="User_Country_FK_idx" columns="Country"/>
+      <index name="User_State_FK_idx" columns="State"/>
+      <index name="User_Education_FK_idx" columns="Education"/>
+      <index name="User_Caste_FK_idx" columns="Caste"/>
+      <index name="User_Religion_FK_idx" columns="Religion"/>
+      <index name="User_Ocupation_FK_idx" columns="Ocupation"/>
+      <index name="User_City_FK_idx" columns="City"/>
+      <index name="User_SubAdmin_FK_idx" columns="Subadmin"/>
+    </indexes>
+    <id name="id" type="integer" column="Id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="Username" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="Email" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="caste" target-entity="Caste" fetch="LAZY">
+      <join-columns>
+        <join-column name="Caste" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="city" target-entity="City" fetch="LAZY">
+      <join-columns>
+        <join-column name="City" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="country" target-entity="Country" fetch="LAZY">
+      <join-columns>
+        <join-column name="Country" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="education" target-entity="Education" fetch="LAZY">
+      <join-columns>
+        <join-column name="Education" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ocupation" target-entity="Ocupation" fetch="LAZY">
+      <join-columns>
+        <join-column name="Ocupation" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="religion" target-entity="Religion" fetch="LAZY">
+      <join-columns>
+        <join-column name="Religion" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="state" target-entity="State" fetch="LAZY">
+      <join-columns>
+        <join-column name="State" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="subadmin" target-entity="Subadmin" fetch="LAZY">
+      <join-columns>
+        <join-column name="Subadmin" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,66 @@
+{% extends'::admin.html.twig' %}
+
+{% block body %}
+
+<h2>Update Package</h2> <br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary" data-collapsed="0">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Update Package
+                </div>
+                <div class="panel-options"> <a href="#" data-rel="collapse"><i
+                                class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i
+                                class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i
+                                class="entypo-cancel"></i></a></div>
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" role="form" class="form-horizontal form-groups-bordered">
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-5">
+                            <input type="text" value="{{ Package.Name }}" name="name" class="form-control" id="field-1"
+                                                     placeholder="Placeholder(Name)"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-3 control-label">Price</label>
+                        <div class="col-sm-5">
+                            <input type="text" value="{{ Package.Price }}" name="price" class="form-control" id="field-1"
+                                                     placeholder="Placeholder(Price)"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-3 control-label">Month</label>
+                        <div class="col-sm-5">
+                            <input type="number" value="{{ Package.Month }}" name="month" class="form-control" id="field-1"
+                                                     placeholder="Placeholder(Month)"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-3 control-label">Interest</label>
+                        <div class="col-sm-5">
+                            <input type="number" value="{{ Package.Interest }}" name="interest" class="form-control" id="field-1"
+                                                     placeholder="Placeholder(Interest)"></div>
+                    </div>
+                    {#<div class="form-group"><label class="col-sm-3 control-label">Select List</label>
+                        <div class="col-sm-5">
+                            <select name="religion" class="form-control">
+                                {% for item in Religion %}
+                                    <option value="{{ item.id }}">{{ item.Name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>#}
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-5">
+                            <button type="submit" class="btn btn-default">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+{% endblock %}

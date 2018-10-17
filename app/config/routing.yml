@@ -1,0 +1,17 @@
+sub_admin:
+    resource: "@SubAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:   annotation
+    prefix:   /
+
+home:
+    resource: "@HomeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
