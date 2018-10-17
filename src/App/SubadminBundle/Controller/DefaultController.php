@@ -66,7 +66,7 @@ class DefaultController extends Controller
                 return $this->render('SubAdminBundle:Default:index.html.twig',
                     array(
                         'NotMatch' => $notmatch,
-                        'Block' => $notmatch
+                        'Block' => $error
                     ));
             }
         }
