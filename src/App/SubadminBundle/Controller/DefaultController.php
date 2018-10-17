@@ -35,8 +35,9 @@ class DefaultController extends Controller
      * @Route("/Subadmin/login", name="subadmins_login")
      */
     public function loginAction(Request $request){
+        $error = '';
+        $notmatch = '';
         if ($request->getMethod() == "POST"){
-            $error = "You Are Blocked Temporary!";
             $phone = $request->get('phone');
             $password = $request->get('password');
             $user = $this->getDoctrine()->getRepository(Subadmin::class)->findOneBy(
@@ -45,23 +46,33 @@ class DefaultController extends Controller
                     'password' => $password
                 ));
             if ($user != null){
+
                 if ($user->getBlock() == 0){
                     if (session_status() == PHP_SESSION_NONE){
                         session_start();
                     }
                 }else{
-                    return $this->redirect($this->generateUrl('subadmins_login'));
+                    $error = "You Are Blocked Temporary!";
+                    return $this->render('SubAdminBundle:Default:index.html.twig',
+                        array(
+                            'Block' => $error
+                        ));
                 }
                 $_SESSION['subadmin'] = $phone;
                 return $this->redirect($this->generateUrl('admin_subadmins'));
             }else{
-                echo $error;
-//                return $this->redirect($this->generateUrl('subadmins_login'));
+                $notmatch = "Phone Or Password Is Incorrect!";
+                return $this->render('SubAdminBundle:Default:index.html.twig',
+                    array(
+                        'NotMatch' => $notmatch
+                    ));
             }
         }
+
         return $this->render('SubAdminBundle:Default:index.html.twig',
             array(
-                'Block' => $error
+                'Block' => $error,
+                'NotMatch' => $notmatch
             ));
     }
 
