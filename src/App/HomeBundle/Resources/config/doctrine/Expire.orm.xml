@@ -13,9 +13,14 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="currentdate" type="string" column="Currentdate" length="45" nullable="true">
+    <field name="expiredate" type="string" column="Expiredate" length="45" nullable="true">
       <options>
         <option name="fixed"/>
+      </options>
+    </field>
+    <field name="status" type="integer" column="Status" nullable="true">
+      <options>
+        <option name="unsigned"/>
       </options>
     </field>
     <many-to-one field="package" target-entity="Package" fetch="LAZY">

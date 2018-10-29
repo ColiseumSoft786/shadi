@@ -167,4 +167,62 @@ class Expire
     {
         return $this->currentdate;
     }
+    /**
+     * @var string
+     */
+    private $expiredate;
+
+
+    /**
+     * Set expiredate
+     *
+     * @param string $expiredate
+     *
+     * @return Expire
+     */
+    public function setExpiredate($expiredate)
+    {
+        $this->expiredate = $expiredate;
+
+        return $this;
+    }
+
+    /**
+     * Get expiredate
+     *
+     * @return string
+     */
+    public function getExpiredate()
+    {
+        return $this->expiredate;
+    }
+    /**
+     * @var integer
+     */
+    private $status;
+
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Expire
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

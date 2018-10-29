@@ -1,0 +1,99 @@
+{% extends'::subadmin.html.twig' %}
+
+{% block body %}
+
+<h2>Interest Notifications</h2> <br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary" data-collapsed="0">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Interests
+                </div>
+                <div class="panel-options"> <a href="#" data-rel="collapse"><i
+                                class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i
+                                class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i
+                                class="entypo-cancel"></i></a></div>
+            </div>
+            <div class="panel-body">
+
+                <div class="col-md-6">
+                    <h3>Interest Received</h3>
+                    <div class="col-md-10" style="padding: 15px 0px;">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;">UserId</th>
+                                    <th style="text-align: center;">Name</th>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">Status</th>
+                                    <th style="text-align: center;">Profile</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in Sendby %}
+                                    <tr style="text-align: center;">
+                                    <td>{{ item.sendto.userid }}</td>
+                                    <td>{{ item.sendto.uname }}</td>
+                                    <td>{{ item.date }}</td>
+                                    {% if item.accept == 1 %}
+                                        <td><a href="javascript:void(0);" class="btn btn-success">Accepted</a></td>
+                                    {% elseif item.accept == 2 %}
+                                        <td><a href="javascript:void(0);" class="btn btn-danger">Rejected</a></td>
+                                    {% else %}
+                                        <td><a href="javascript:void(0);" class="btn btn-info">Pending</a></td>
+                                    {% endif %}
+                                        <td><a href="{{ path('single_users_interest_profile',{id:item.id}) }}" class="btn btn-primary">View Profile</a></td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Interest Sent</h3>
+                    <div class="col-md-10" style="padding: 15px 0px;">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">User ID</th>
+                                <th style="text-align: center;">Name</th>
+                                <th style="text-align: center;">Phone</th>
+                                <th style="text-align: center;">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in Sendto %}
+                                <tr style="text-align: center;">
+                                    {% if item.accept == 0 %}
+                                        <td>{{ item.sendby.userid }}</td>
+                                        <td>{{ item.sendby.uname }}</td>
+                                        <td>Pending</td>
+                                        <td><a href="javascript:void(0)" class="btn btn-info">Pending</a></td>
+                                    {% elseif item.accept == 1 %}
+                                        <td>{{ item.sendby.userid }}</td>
+                                        <td>{{ item.sendby.uname }}</td>
+                                        <td>{{ item.sendby.uphone }}</td>
+                                        <td><a href="javascript:void(0)" class="btn btn-success">Accepted</a></td>
+                                    {% elseif item.accept == 2 %}
+                                        <td>Expired</td>
+                                        <td><a href="javascript:void(0)" class="btn btn-danger">Rejected</a></td>
+                                    {% endif %}
+                                    {#<td><a href="{{ path('single_users_interest_profile',{id:item.id}) }}" class="btn btn-primary">View Profile</a></td>#}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+{% endblock %}

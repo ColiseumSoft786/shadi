@@ -10,18 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CasteController extends Controller
 {
-    /**
-     * @Route("/Caste/{id}", name="admin_castes")
-     */
-    public function CastesAction($id)
+
+    public $adminloggedin = false;
+    public $admin = null;
+
+    public function __construct()
     {
-        $caste = $this->getDoctrine()->getRepository(Caste::class)->findBy(
-            array(
-                'religion' => $id
+        if (isset($_SESSION['admin'])){
+            $this->admin = $_SESSION['admin'];
+            $this->adminloggedin = true;
+        }
+    }
+
+    /**
+     * @Route("/Caste", name="admin_castes")
+     */
+    public function CastesAction()
+    {
+        if ($this->adminloggedin == true){
+            $caste = $this->getDoctrine()->getRepository(Caste::class)->findAll();
+            return $this->render('AdminBundle:Admin/Caste:caste.html.twig', array(
+                'Caste' => $caste
             ));
-        return $this->render('AdminBundle:Admin/Caste:packages.html.twig', array(
-            'Caste' => $caste
-        ));
+        }
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -29,23 +41,26 @@ class CasteController extends Controller
      */
     public function AddCasteAction(Request $request)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $caste = new Caste();
-            $caste->setName($request->get('name'));
-            $relId = $this->getDoctrine()->getRepository(Religion::class)->find($request->get('religion'));
-            $caste->setReligion($relId);
-            $em->persist($caste);
-            $em->flush();
-            return $this->redirectToRoute('admin_castes',
-                array(
-                    'id' => $caste->getReligion()->getId()
-                ));
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $caste = new Caste();
+                $caste->setName($request->get('name'));
+                $relId = $this->getDoctrine()->getRepository(Religion::class)->find($request->get('religion'));
+                $caste->setReligion($relId);
+                $em->persist($caste);
+                $em->flush();
+                return $this->redirectToRoute('admin_castes',
+                    array(
+                        'id' => $caste->getReligion()->getId()
+                    ));
+            }
+            $religion = $this->getDoctrine()->getRepository(Religion::class)->findAll();
+            return $this->render('AdminBundle:Admin/Caste:addpackages.html.twig', array(
+                'Religion' => $religion
+            ));
         }
-        $religion = $this->getDoctrine()->getRepository(Religion::class)->findAll();
-        return $this->render('AdminBundle:Admin/Caste:addpackages.html.twig', array(
-            'Religion' => $religion
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -53,24 +68,27 @@ class CasteController extends Controller
      */
     public function UpdateCasteAction(Request $request, $id)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $caste = $em->getRepository(Caste::class)->find($id);
-            $caste->setName($request->get('name'));
-            $relId = $this->getDoctrine()->getRepository(Religion::class)->find($request->get('religion'));
-            $caste->setReligion($relId);
-            $em->flush();
-            return $this->redirectToRoute('admin_castes',
-                array(
-                    'id' => $caste->getReligion()->getId()
-                ));
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $caste = $em->getRepository(Caste::class)->find($id);
+                $caste->setName($request->get('name'));
+                $relId = $this->getDoctrine()->getRepository(Religion::class)->find($request->get('religion'));
+                $caste->setReligion($relId);
+                $em->flush();
+                return $this->redirectToRoute('admin_castes',
+                    array(
+                        'id' => $caste->getReligion()->getId()
+                    ));
+            }
+            $religion = $this->getDoctrine()->getRepository(Religion::class)->findAll();
+            $caste1 = $this->getDoctrine()->getRepository(Caste::class)->find($id);
+            return $this->render('AdminBundle:Admin/Caste:updatepackages.html.twig', array(
+                'Caste' => $caste1,
+                'Religion' => $religion
+            ));
         }
-        $religion = $this->getDoctrine()->getRepository(Religion::class)->findAll();
-        $caste1 = $this->getDoctrine()->getRepository(Caste::class)->find($id);
-        return $this->render('AdminBundle:Admin/Caste:updatepackages.html.twig', array(
-            'Caste' => $caste1,
-            'Religion' => $religion
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
 

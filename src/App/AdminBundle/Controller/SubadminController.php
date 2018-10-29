@@ -10,62 +10,32 @@ use Symfony\Component\HttpFoundation\Request;
 class SubadminController extends Controller
 {
 
-    public $loggedin = false;
-    public $subadmin = null;
+    public $adminloggedin = false;
+    public $admin = null;
 
     public function __construct()
     {
-        if (isset($_SESSION['subadmin'])){
-            $this->subadmin = $_SESSION['subadmin'];
-            $this->loggedin = true;
+        if (isset($_SESSION['admin'])){
+            $this->admin = $_SESSION['admin'];
+            $this->adminloggedin = true;
         }
     }
 
 
-
-//    /**
-//     * @Route("/Subadmin/login", name="subadmins_login_rout")
-//     */
-//    public function loginAction(Request $request){
-//        if ($request->getMethod() == "POST"){
-//            $phone = $request->get('phone');
-//            $password = $request->get('password');
-//            $user = $this->getDoctrine()->getRepository(Subadmin::class)->findOneBy(
-//                array(
-//                    'phone' => $phone,
-//                    'password' => $password
-//                ));
-//            if ($user != null){
-//                if ($user->getBlock() == 0){
-//                    if (session_status() == PHP_SESSION_NONE){
-//                        session_start();
-//                    }
-//                }else{
-//                    return $this->redirect($this->generateUrl('subadmins_login_rout'));
-//                }
-//                $_SESSION['subadmin'] = $phone;
-//                return $this->redirect($this->generateUrl('admin_subadmin_insert'));
-//            }else{
-//                return $this->redirect($this->generateUrl('subadmins_login_rout'));
-//            }
-//        }
-//        return $this->render('AdminBundle:Admin/Subadmin:login.html.twig');
-//    }
 
     /**
      * @Route("/SubAdmins", name="admin_subadmins")
      */
     public function SubAdminAction()
     {
-        if ($this->loggedin == true){
+        if ($this->adminloggedin == true){
+//            echo $_SESSION['subadmin'];
             $sadmin = $this->getDoctrine()->getRepository(Subadmin::class)->findAll();
             return $this->render('AdminBundle:Admin/Subadmin:subadmin.html.twig', array(
                 'SubAdmin' => $sadmin
             ));
         }
-        $error = '<script>alert("You Are Blocked Temporary!")</script>';
-        echo $error;
-        return $this->redirectToRoute('subadmins_login');
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -73,20 +43,23 @@ class SubadminController extends Controller
      */
     public function AddSubAdminAction(Request $request)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $sadmin = new Subadmin();
-            $sadmin->setName($request->get('name'));
-            $sadmin->setPhone($request->get('phone'));
-            $sadmin->setPassword($request->get('password'));
-            $sadmin->setBlock(0);
-            $em->persist($sadmin);
-            $em->flush();
-            return $this->redirectToRoute('admin_subadmins');
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $sadmin = new Subadmin();
+                $sadmin->setName($request->get('name'));
+                $sadmin->setPhone($request->get('phone'));
+                $sadmin->setPassword($request->get('password'));
+                $sadmin->setBlock(0);
+                $em->persist($sadmin);
+                $em->flush();
+                return $this->redirectToRoute('admin_subadmins');
+            }
+            return $this->render('AdminBundle:Admin/Subadmin:addsubadmin.html.twig', array(
+                // ...
+            ));
         }
-        return $this->render('AdminBundle:Admin/Subadmin:addsubadmin.html.twig', array(
-            // ...
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -94,20 +67,23 @@ class SubadminController extends Controller
      */
     public function UpdateSubAdminAction(Request $request, $id)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $sadmin = $em->getRepository(Subadmin::class)->find($id);
-            $sadmin->setName($request->get('name'));
-            $sadmin->setPhone($request->get('phone'));
-            $sadmin->setPassword($request->get('password'));
-            $sadmin->setBlock(0);
-            $em->flush();
-            return $this->redirectToRoute('admin_subadmins');
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $sadmin = $em->getRepository(Subadmin::class)->find($id);
+                $sadmin->setName($request->get('name'));
+                $sadmin->setPhone($request->get('phone'));
+                $sadmin->setPassword($request->get('password'));
+                $sadmin->setBlock(0);
+                $em->flush();
+                return $this->redirectToRoute('admin_subadmins');
+            }
+            $subadmin = $this->getDoctrine()->getRepository(Subadmin::class)->find($id);
+            return $this->render('AdminBundle:Admin/Subadmin:updatesubadmin.html.twig', array(
+                'SubAdmin' => $subadmin
+            ));
         }
-        $subadmin = $this->getDoctrine()->getRepository(Subadmin::class)->find($id);
-        return $this->render('AdminBundle:Admin/Subadmin:updatesubadmin.html.twig', array(
-            'SubAdmin' => $subadmin
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -115,11 +91,14 @@ class SubadminController extends Controller
      */
     public function DeleteSubAdminAction($id)
     {
+        if ($this->adminloggedin == true){
             $em = $this->getDoctrine()->getManager();
             $sadmin = $em->getRepository(Subadmin::class)->find($id);
             $em->remove($sadmin);
             $em->flush();
             return $this->redirectToRoute('admin_subadmins');
+        }
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -127,7 +106,7 @@ class SubadminController extends Controller
      */
     public function BlockSubAdminAction(Request $request,$id)
     {
-        if ($request->getMethod() == "GET"){
+        if ($this->adminloggedin == true){
             $em = $this->getDoctrine()->getManager();
             $sadmin = $em->getRepository(Subadmin::class)->find($id);
             if ($sadmin->getBlock() == 1){
@@ -136,8 +115,9 @@ class SubadminController extends Controller
                 $sadmin->setBlock(1);
             }
             $em->flush();
-        }
         return $this->redirectToRoute('admin_subadmins');
+        }
+        return $this->redirectToRoute('workplace_login');
     }
 
 

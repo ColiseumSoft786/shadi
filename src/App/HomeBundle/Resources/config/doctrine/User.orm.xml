@@ -10,16 +10,173 @@
       <index name="User_Ocupation_FK_idx" columns="Ocupation"/>
       <index name="User_City_FK_idx" columns="City"/>
       <index name="User_SubAdmin_FK_idx" columns="Subadmin"/>
+      <index name="User_UserLPReligion_ID_FK_idx" columns="LPReligion"/>
+      <index name="User_UserLPCast_ID_FK_idx" columns="LPCaste"/>
+      <index name="User_UserLPCountry_ID_FK_idx" columns="LPCountry"/>
+      <index name="User_UserLPState_ID_FK_idx" columns="LPState"/>
+      <index name="User_UserLPCity_ID_FK_idx" columns="LPCity"/>
+      <index name="User_FatherOcupation_FK_idx" columns="UFatherOcupation"/>
+      <index name="User_UMotherOcupation_FK_idx" columns="UMotherOcupation"/>
     </indexes>
+    <unique-constraints>
+      <unique-constraint name="Userid_UNIQUE" columns="Userid"/>
+    </unique-constraints>
     <id name="id" type="integer" column="Id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="username" type="string" column="Username" length="45" nullable="true">
+    <field name="approve" type="boolean" column="Approve" nullable="true"/>
+    <field name="upic" type="string" column="UPic" length="255" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="email" type="string" column="Email" length="45" nullable="true">
+    <field name="uname" type="string" column="UName" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uphone" type="string" column="UPhone" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ugender" type="string" column="UGender" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="umartialstatus" type="string" column="UMartialStatus" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uage" type="string" column="UAge" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uheight" type="string" column="UHeight" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ujobbusinesstitle" type="string" column="UJobBusinessTitle" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ujobbusiness" type="string" column="UJobBusiness" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uincome" type="string" column="UIncome" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="color" type="string" column="Color" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ubodytype" type="string" column="UBodyType" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uride" type="string" column="URide" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="bearhijab" type="string" column="BearHijab" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ubrothers" type="string" column="UBrothers" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usisters" type="string" column="USisters" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="umarriedsisters" type="string" column="UMarriedSisters" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="umarriedbrothers" type="string" column="UMarriedBrothers" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="umothertongue" type="string" column="UMotherTongue" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uaccommodation" type="string" column="UAccommodation" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uaccommodationstatus" type="string" column="UAccommodationStatus" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="uhousesize" type="string" column="UHouseSize" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lpminage" type="string" column="LPMinAge" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lpmaxage" type="string" column="LPMaxAge" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lpheight" type="string" column="LPHeight" length="245" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lpmessage" type="text" column="LPMessage" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="verifykey" type="boolean" column="VerifyKey" nullable="true"/>
+    <field name="userid" type="string" column="Userid" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="block" type="string" column="Block" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="Password" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="startdate" type="string" column="StartDate" length="45" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="privacy" type="string" column="Privacy" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
@@ -44,6 +201,11 @@
         <join-column name="Education" referenced-column-name="Id"/>
       </join-columns>
     </many-to-one>
+    <many-to-one field="ufatherocupation" target-entity="Ocupation" fetch="LAZY">
+      <join-columns>
+        <join-column name="UFatherOcupation" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="ocupation" target-entity="Ocupation" fetch="LAZY">
       <join-columns>
         <join-column name="Ocupation" referenced-column-name="Id"/>
@@ -62,6 +224,36 @@
     <many-to-one field="subadmin" target-entity="Subadmin" fetch="LAZY">
       <join-columns>
         <join-column name="Subadmin" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="umotherocupation" target-entity="Ocupation" fetch="LAZY">
+      <join-columns>
+        <join-column name="UMotherOcupation" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lpcaste" target-entity="Caste" fetch="LAZY">
+      <join-columns>
+        <join-column name="LPCaste" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lpcity" target-entity="City" fetch="LAZY">
+      <join-columns>
+        <join-column name="LPCity" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lpcountry" target-entity="Country" fetch="LAZY">
+      <join-columns>
+        <join-column name="LPCountry" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lpreligion" target-entity="Religion" fetch="LAZY">
+      <join-columns>
+        <join-column name="LPReligion" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="lpstate" target-entity="State" fetch="LAZY">
+      <join-columns>
+        <join-column name="LPState" referenced-column-name="Id"/>
       </join-columns>
     </many-to-one>
   </entity>

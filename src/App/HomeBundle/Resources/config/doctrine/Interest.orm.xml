@@ -2,22 +2,27 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="App\HomeBundle\Entity\Interest" table="interest">
     <indexes>
-      <index name="Interest_User_FK_idx" columns="Sendto"/>
+      <index name="Interest_User_SendBy_FK_idx" columns="Sendby"/>
+      <index name="Interest_User_Sendto_FK" columns="Sendto"/>
     </indexes>
     <id name="id" type="integer" column="Id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="sendby" type="integer" column="Sendby" nullable="true">
+    <field name="accept" type="integer" column="Accept" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>
     </field>
-    <field name="accept" type="boolean" column="Accept" nullable="true"/>
     <field name="date" type="string" column="Date" length="45" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+    <many-to-one field="sendby" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="Sendby" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="sendto" target-entity="User" fetch="LAZY">
       <join-columns>
         <join-column name="Sendto" referenced-column-name="Id"/>

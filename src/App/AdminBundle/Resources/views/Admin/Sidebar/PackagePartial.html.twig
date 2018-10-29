@@ -1,0 +1,6 @@
+{% for item in Expire %}
+    {% if item.status != 1 %}
+        <td style="vertical-align: middle;"> {{ item.package.Name }}</td>
+        <td style="vertical-align: middle;"> {{ item.Expiredate }}</td>
+    {% endif %}
+{% endfor %}

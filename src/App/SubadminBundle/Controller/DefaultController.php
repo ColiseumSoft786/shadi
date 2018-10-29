@@ -9,13 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-//    /**
-//     * @Route("/login")
-//     */
-//    public function indexAction()
-//    {
-//        return $this->render('SubAdminBundle:Default:index.html.twig');
-//    }
 
 
     public $loggedin = false;
@@ -32,7 +25,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/Subadmin/login", name="subadmins_login")
+     * @Route("/Subadmin/login", name="sub_admins_login")
      */
     public function loginAction(Request $request){
         $error = '';
@@ -52,15 +45,15 @@ class DefaultController extends Controller
                         session_start();
                     }
                 }else{
-                    $error = "You Are Blocked Temporary!";
+                    $error = "You Are Temporary Blocked!";
                     return $this->render('SubAdminBundle:Default:index.html.twig',
                         array(
                             'Block' => $error,
                             'NotMatch' => $notmatch
                         ));
                 }
-                $_SESSION['subadmin'] = $phone;
-                return $this->redirect($this->generateUrl('admin_subadmins'));
+                $_SESSION['subadmin'] = $user;
+                return $this->redirect($this->generateUrl('sub_admins_users'));
             }else{
                 $notmatch = "Phone Or Password Is Incorrect!";
                 return $this->render('SubAdminBundle:Default:index.html.twig',
@@ -77,6 +70,16 @@ class DefaultController extends Controller
                 'NotMatch' => $notmatch
             ));
     }
+
+
+    /**
+     * @Route("/Subadmin/logout", name="sub_admins_logout")
+     */
+    public function SubAdminLogOutAction(){
+        session_destroy();
+        return $this->redirectToRoute('sub_admins_login');
+    }
+
 
 
 }

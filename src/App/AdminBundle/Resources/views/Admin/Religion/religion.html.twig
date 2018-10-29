@@ -28,6 +28,7 @@
             });
         });
     </script>
+    <h4 style="padding: 10px 0px;">Religion</h4> <span><a href="{{ path('admin_religion_insert') }}" class="btn btn-info">Add Religion</a></span>
     <table class="table table-bordered datatable" id="table-1">
         <thead>
         <tr>
@@ -40,10 +41,8 @@
         {% for item in Religion %}
             <tr class="odd gradeX">
                 <td> &nbsp; {{ item.name }}</td>
-                <td class="col-md-3">
-                    <a href="#" class="btn btn-default btn-sm btn-icon icon-left"> <i class="entypo-pencil"></i>Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm btn-icon icon-left"> <i class="entypo-cancel"></i>Delete</a>
-                    <a href="#" class="btn btn-info btn-sm btn-icon icon-left"> <i class="entypo-info"></i>Profile</a>
+                <td class="col-md-2" style="text-align: center;">
+                    <a href="{{ path('admin_religion_update',{id:item.id}) }}" class="btn btn-default btn-sm btn-icon icon-left"> <i class="entypo-pencil"></i>Edit</a>
                 </td>
             </tr>
         {% endfor %}

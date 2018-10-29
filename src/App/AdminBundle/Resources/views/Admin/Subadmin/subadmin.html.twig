@@ -28,6 +28,8 @@
             });
         });
     </script>
+    <h4 style="padding: 10px 0px;">Sub Admin</h4> <span><a href="{{ path('admin_subadmin_insert') }}" class="btn btn-info">Add Sub Admin</a></span>
+
     <table class="table table-bordered datatable" id="table-1">
         <thead>
         <tr>
@@ -45,12 +47,11 @@
                 <td> &nbsp; {{ item.password }}</td>
                 <td class="col-md-3">
                     <a href="{{ path('admin_subadmin_update',{id:item.id}) }}" class="btn btn-default btn-sm btn-icon icon-left"> <i class="entypo-pencil"></i>Edit</a>
-                        {% if item.block == 0 %}
-                            <a href="{{ path('admin_subadmin_block',{id:item.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left"><i class="entypo-lock"></i>Block</a>
-                            {% else %}
-                    <a href="{{ path('admin_subadmin_block',{id:item.id}) }}" class="btn btn-info btn-sm btn-icon icon-left"><i class="fa fa-unlock"></i>Unblock</a>
-                        {% endif %}
-                    <a href="{{ path('admin_subadmin_delete',{id:item.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left"> <i class="entypo-cancel"></i>Delete</a>
+                    {% if item.block == 1 %}
+                        <a href="{{ path('admin_subadmin_block',{id:item.id}) }}" class="btn btn-info btn-sm btn-icon icon-left"> <i class="entypo-unlock"></i>Unblock</a>
+                    {% else %}
+                        <a href="{{ path('admin_subadmin_block',{id:item.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left"> <i class="entypo-lock"></i>Block</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

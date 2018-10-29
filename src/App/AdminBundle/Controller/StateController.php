@@ -10,18 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 
 class StateController extends Controller
 {
-    /**
-     * @Route("/State/{id}", name="admin_states")
-     */
-    public function StateAction($id)
+
+    public $adminloggedin = false;
+    public $admin = null;
+
+    public function __construct()
     {
-        $state = $this->getDoctrine()->getRepository(State::class)->findBy(
-            array(
-                'country' => $id
+        if (isset($_SESSION['admin'])){
+            $this->admin = $_SESSION['admin'];
+            $this->adminloggedin = true;
+        }
+    }
+
+    /**
+     * @Route("/States", name="admin_states")
+     */
+    public function StateAction()
+    {
+        if ($this->adminloggedin == true){
+            $state = $this->getDoctrine()->getRepository(State::class)->findAll();
+            return $this->render('AdminBundle:Admin/State:state.html.twig', array(
+                'States' => $state
             ));
-        return $this->render('AdminBundle:Admin/State:state.html.twig', array(
-            'States' => $state
-        ));
+        }
+        return $this->redirectToRoute('workplace_login');
     }
 
 
@@ -30,23 +42,26 @@ class StateController extends Controller
      */
     public function AddStateAction(Request $request)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $state = new State();
-            $state->setName($request->get('name'));
-            $conId = $this->getDoctrine()->getRepository(Country::class)->find($request->get('country'));
-            $state->setCountry($conId);
-            $em->persist($state);
-            $em->flush();
-            return $this->redirectToRoute('admin_states',
-                array(
-                    'id' => $state->getCountry()->getId()
-                ));
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $state = new State();
+                $state->setName($request->get('name'));
+                $conId = $this->getDoctrine()->getRepository(Country::class)->find($request->get('country'));
+                $state->setCountry($conId);
+                $em->persist($state);
+                $em->flush();
+                return $this->redirectToRoute('admin_states',
+                    array(
+                        'id' => $state->getCountry()->getId()
+                    ));
+            }
+            $country = $this->getDoctrine()->getRepository(Country::class)->findAll();
+            return $this->render('AdminBundle:Admin/State:addstate.html.twig', array(
+                'Countries' => $country
+            ));
         }
-        $country = $this->getDoctrine()->getRepository(Country::class)->findAll();
-        return $this->render('AdminBundle:Admin/State:addstate.html.twig', array(
-            'Countries' => $country
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
     /**
@@ -54,24 +69,27 @@ class StateController extends Controller
      */
     public function UpdateStateAction(Request $request, $id)
     {
-        if ($request->getMethod() == "POST"){
-            $em = $this->getDoctrine()->getManager();
-            $state = $em->getRepository(State::class)->find($id);
-            $state->setName($request->get('name'));
-            $conId = $this->getDoctrine()->getRepository(Country::class)->find($request->get('country'));
-            $state->setCountry($conId);
-            $em->flush();
-            return $this->redirectToRoute('admin_states',
-                array(
-                    'id' => $state->getCountry()->getId()
-                ));
+        if ($this->adminloggedin == true){
+            if ($request->getMethod() == "POST"){
+                $em = $this->getDoctrine()->getManager();
+                $state = $em->getRepository(State::class)->find($id);
+                $state->setName($request->get('name'));
+                $conId = $this->getDoctrine()->getRepository(Country::class)->find($request->get('country'));
+                $state->setCountry($conId);
+                $em->flush();
+                return $this->redirectToRoute('admin_states',
+                    array(
+                        'id' => $state->getCountry()->getId()
+                    ));
+            }
+            $country = $this->getDoctrine()->getRepository(Country::class)->findAll();
+            $state1 = $this->getDoctrine()->getRepository(State::class)->find($id);
+            return $this->render('AdminBundle:Admin/State:updatestate.html.twig', array(
+                'State' => $state1,
+                'Countries' => $country
+            ));
         }
-        $country = $this->getDoctrine()->getRepository(Country::class)->findAll();
-        $state1 = $this->getDoctrine()->getRepository(State::class)->find($id);
-        return $this->render('AdminBundle:Admin/State:updatestate.html.twig', array(
-            'State' => $state1,
-            'Countries' => $country
-        ));
+        return $this->redirectToRoute('workplace_login');
     }
 
 }

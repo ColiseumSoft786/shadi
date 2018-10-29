@@ -1,0 +1,241 @@
+{% extends'::subadmin.html.twig' %}
+
+{% block body %}
+    {#filtration scripts#}
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("name");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function myFunction1() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("age");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function myFunction2() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("userid");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function myFunction3() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("country");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[6];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function myFunction4() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("religion");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[9];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function myFunction5() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("package");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-1");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[13];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    {#filtration scripts#}
+    <div class="col-md-12" style="padding-bottom: 50px;">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search Name</label>
+                <input type="text" id="name" class="form-control" onkeyup="myFunction()" placeholder="Name">
+            </div>
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search Age</label>
+                <input type="text" id="age" class="form-control" onkeyup="myFunction1()" placeholder="Age">
+            </div>
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search User Id</label>
+                <input type="text" id="userid" class="form-control" onkeyup="myFunction2()" placeholder="User ID">
+            </div>
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search Country</label>
+                <input type="text" id="country" class="form-control" onkeyup="myFunction3()" placeholder="Country">
+            </div>
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search Religion</label>
+                <input type="text" id="religion" class="form-control" onkeyup="myFunction4()" placeholder="Religion">
+            </div>
+            <div class="col-md-2">
+                <label for="name" class="label label-primary">Search Package</label>
+                <input type="text" id="package" class="form-control" onkeyup="myFunction5()" placeholder="Package">
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            var $table1 = jQuery('#table-1');
+// Initialize DataTable
+            $table1.DataTable({
+                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "bStateSave": true,
+                dom: 'lBfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+// Initalize Select Dropdown after DataTables is created
+            $table1.closest('.dataTables_wrapper').find('select').select2({
+                minimumResultsForSearch: -1
+            });
+        });
+    </script>
+
+    <h4>Other Sub Admin Members</h4>
+    <table class="table table-bordered datatable" id="table-1">
+        <thead>
+        <tr>
+            <th>User Image</th>
+            <th>Member Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Martial Status</th>
+            <th>Age</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Religion</th>
+            <th>Caste</th>
+            <th>Member Since</th>
+            <th>Package</th>
+            <th>Expire Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in SAdminAllMembers %}
+            {% if item.subadmin.id == null %}
+                <tr class="odd gradeX" style="text-align: center;">
+                    {% if item.privacy == 1 %}
+                        <td> &nbsp; <img src="{{ asset('bundles/assets/icon.png') }}" style="width: 60px; height: 60px;" alt=""> </td>
+                    {% else %}
+                        <td> &nbsp; <img src="{{ asset(item.upic) }}" style="width: 60px; height: 60px;" alt=""> </td>
+                    {% endif %}
+                    <td style="vertical-align: middle;">{{ item.userid }}</td>
+                    <td style="vertical-align: middle;">{{ item.uname }}</td>
+                    <td style="vertical-align: middle;">{{ item.uphone }}</td>
+                    <td style="vertical-align: middle;">{{ item.umartialstatus }}</td>
+                    <td style="vertical-align: middle;">{{ item.uage }}</td>
+                    <td style="vertical-align: middle;">{{ item.country.name }}</td>
+                    <td style="vertical-align: middle;">{{ item.state.name }}</td>
+                    <td style="vertical-align: middle;">{{ item.city.name }}</td>
+                    <td style="vertical-align: middle;">{{ item.religion.name }}</td>
+                    <td style="vertical-align: middle;">{{ item.caste.name }}</td>
+                    <td style="vertical-align: middle;">{{ item.startdate }}</td>
+                    {{ render(controller(
+                        'AdminBundle:Sidebar:AdminUserPackagePartialView',{'id':item.id}
+                    )) }}
+                    <td class="col-md-3" style="padding: 20px 0px; text-align: center;">
+                        {#<a href="{{ path('sub_admins_users_update',{id:item.id}) }}" class="btn btn-default btn-sm btn-icon icon-left"> <i class="entypo-pencil"></i>Edit</a>#}
+                        <a href="{{ path('sub_admins_users_profile_for_others',{id:item.id}) }}" title="View Profile" class="btn btn-primary"> <i class="entypo-eye"></i></a>
+                        <a href="{{ path('sub_admins_users_interest',{id:item.id}) }}" title="Send Interest" class="btn btn-info"><i class="entypo-heart"></i></a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>User Image</th>
+            <th>Member Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Martial Status</th>
+            <th>Age</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Religion</th>
+            <th>Caste</th>
+            <th>Member Since</th>
+            <th>Package</th>
+            <th>Expire Date</th>
+            <th>Action</th>
+        </tr>
+        </tfoot>
+    </table>
+
+
+{% endblock %}

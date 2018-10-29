@@ -1,0 +1,227 @@
+{% extends'::subadmin.html.twig' %}
+
+{% block body %}
+
+    <h2>User Profile</h2> <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" data-collapsed="0">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        Profile
+                    </div>
+                    <div class="panel-options"> <a href="#" data-rel="collapse"><i
+                                    class="entypo-down-open"></i></a> <a href="#" data-rel="reload"><i
+                                    class="entypo-arrows-ccw"></i></a> <a href="#" data-rel="close"><i
+                                    class="entypo-cancel"></i></a></div>
+                </div>
+                <div class="panel-body">
+                    <form action="" method="post" enctype="multipart/form-data" role="form" class="form-horizontal form-groups-bordered">
+
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                {% if Users.approve == 1 %}
+                                    {% if Users.privacy == 1 %}
+                                        <img src="{{ asset('bundles/assets/icon.png') }}" style="width: 100px; height: 100px;" alt="">
+                                    {% else %}
+                                        <img src="{{ asset(Users.Upic) }}" style="width: 100%;" alt="">
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-9">
+                                {#<input type="text" name="name" value="{{ UserData.Uname }}" placeholder="Full Name" class="form-control">#}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Uname }}" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" readonly value="{{ Users.Uphone }}" class="form-control">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="password" value="{{ Users.password }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Ugender }}" class="form-control" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                                    <input type="text" value="{{ Users.UMartialStatus }}" class="form-control" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Color }}" class="form-control" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Uage }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Uheight }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Education.name }}" class="form-control" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Ujobbusinesstitle }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Ujobbusiness }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Ocupation.name }}" class="form-control" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Uincome }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Religion.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Caste.name }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.UBodyType }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.URide }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Bearhijab }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <h3>Family details</h3>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Ufatherocupation.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Umotherocupation.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Umothertongue }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <input type="text" value="{{ Users.Ubrothers }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" value="{{ Users.Usisters }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" value="{{ Users.Umarriedbrothers }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" value="{{ Users.Umarriedsisters }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+
+                        <h3>Residence</h3>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.UAccommodation }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.UAccommodationStatus }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Uhousesize }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Country.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.State.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.City.name }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+
+                        <h3>Life partner Requirements</h3>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpminage }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpmaxage }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpheight }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpcountry.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpstate.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpcity.name }}" readonly class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpreligion.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" value="{{ Users.Lpcaste.name }}" readonly class="form-control" >
+                            </div>
+                            <div class="col-sm-4">
+                                <textarea class="form-control" readonly>{{ Users.Lpmessage }}</textarea>
+                            </div>
+                        </div>
+                        {#<div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3" style="text-align: center;">
+                                <button type="submit" class="btn btn-info btn-lg">Register</button>
+                            </div>
+                        </div>#}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+    <script>
+        $(document).ready(function () {
+            $("#caste").prop( "disabled", true );
+            $("#rstate").prop( "disabled", true );
+            $("#rcity").prop( "disabled", true );
+            $("#lpstate").prop( "disabled", true );
+            $("#lpcity").prop( "disabled", true );
+            $("#lpcaste").prop( "disabled", true );
+        });
+
+    </script>
+{% endblock %}
